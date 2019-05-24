@@ -8,7 +8,7 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener {
   int WIDTH = 650;
   int HEIGHT = WIDTH;
   double MASS = 1.0;
-  int N = 20;
+  int N = 15;
   double DT = 0.0001;
   ElasticBandData ebd;
 
