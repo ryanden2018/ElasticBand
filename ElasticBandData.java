@@ -28,8 +28,6 @@ class ElasticBandData {
         }
       }
     }
-
-    
   }
 
   void update() {

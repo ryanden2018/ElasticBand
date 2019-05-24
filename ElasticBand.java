@@ -24,10 +24,11 @@ class ElasticBand implements ActionListener {
     }
   }
 
+  
   public void actionPerformed(ActionEvent e) {
     ebg.repaint();
   }
-
+  
   public static void main(String args[]) {
     new ElasticBand();
   }

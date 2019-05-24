@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.awt.geom.*;
+import java.awt.event.*;
 
-class ElasticBandGraphics extends JComponent {
+class ElasticBandGraphics extends JComponent implements MouseMotionListener {
   int WIDTH = 650;
   int HEIGHT = WIDTH;
   double MASS = 1.0;
@@ -14,6 +15,7 @@ class ElasticBandGraphics extends JComponent {
   ElasticBandGraphics() {
     setPreferredSize(new Dimension(WIDTH,HEIGHT));
     ebd = new ElasticBandData(MASS,N,DT,WIDTH);
+    addMouseMotionListener(this);
   }
 
   @Override
@@ -41,4 +43,14 @@ class ElasticBandGraphics extends JComponent {
 
     super.paintComponent(g);
   }
+
+
+
+  public void mouseMoved(MouseEvent e) {
+     
+  }
+  
+  public void mouseDragged(MouseEvent e) { }
+
+
 }
