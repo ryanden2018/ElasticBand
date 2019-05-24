@@ -29,8 +29,7 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener {
         10, 10);
     }
 
-    BasicStroke bs = new BasicStroke(3);
-    ((Graphics2D) g).setStroke(bs);
+    ((Graphics2D) g).setStroke(new BasicStroke(3));
 
     int[] xPoints = new int[ebd.masses.length];
     int[] yPoints = new int[ebd.masses.length];
@@ -47,7 +46,8 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener {
 
 
   public void mouseMoved(MouseEvent e) {
-     
+    ebd.cursorX = e.getX();
+    ebd.cursorY = e.getY();
   }
   
   public void mouseDragged(MouseEvent e) { }
