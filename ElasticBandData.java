@@ -50,15 +50,15 @@ class ElasticBandData {
       double nabs = Math.sqrt(Math.pow(nx,2)+Math.pow(ny,2));
       nx = nx / nabs;
       ny = ny / nabs;
-      springs[i].oneEnd.vx += springs[i].forceX()*dt / springs[i].oneEnd.mass - 5*nx*Math.exp(-nabs/(width*width))*dt - 0.05*springs[i].oneEnd.vx*dt;
-      springs[i].oneEnd.vy += springs[i].forceY()*dt / springs[i].oneEnd.mass - 5*ny*Math.exp(-nabs/(width*width))*dt - 0.05*springs[i].oneEnd.vy*dt;
+      springs[i].oneEnd.vx += springs[i].forceX()*dt / springs[i].oneEnd.mass - 5*nx*dt - 0.05*springs[i].oneEnd.vx*dt;
+      springs[i].oneEnd.vy += springs[i].forceY()*dt / springs[i].oneEnd.mass - 5*ny*dt - 0.05*springs[i].oneEnd.vy*dt;
       nx = springs[i].otherEnd.centerX-cursorX;
       ny = springs[i].otherEnd.centerY - cursorY;
       nabs = Math.sqrt(Math.pow(nx,2)+Math.pow(ny,2));
       nx = nx / nabs;
       ny = ny / nabs;
-      springs[i].otherEnd.vx -= springs[i].forceX()*dt / springs[i].oneEnd.mass + 5*nx*Math.exp(-nabs/(width*width))*dt + 0.05*springs[i].otherEnd.vx*dt;
-      springs[i].otherEnd.vy -= springs[i].forceY()*dt / springs[i].oneEnd.mass + 5*ny*Math.exp(-nabs/(width*width))*dt + 0.05*springs[i].otherEnd.vy*dt;
+      springs[i].otherEnd.vx -= springs[i].forceX()*dt / springs[i].oneEnd.mass + 5*nx*dt + 0.05*springs[i].otherEnd.vx*dt;
+      springs[i].otherEnd.vy -= springs[i].forceY()*dt / springs[i].oneEnd.mass + 5*ny*dt + 0.05*springs[i].otherEnd.vy*dt;
     }
   }
 }
