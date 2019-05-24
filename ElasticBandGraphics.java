@@ -37,7 +37,7 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener, Mou
 
   void paintEbd(Graphics g, ElasticBandData ebd0) {
     ((Graphics2D) g).setStroke(new BasicStroke(4));
-    g.setFont(new Font("Helvetica",Font.BOLD,18));
+    g.setFont(new Font("SansSerif",Font.BOLD,18));
 
     int[] xPoints = new int[ebd0.masses.length];
     int[] yPoints = new int[ebd0.masses.length];
