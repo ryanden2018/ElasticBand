@@ -4,18 +4,23 @@ import java.util.*;
 import java.awt.geom.*;
 import java.awt.event.*;
 
-class ElasticBandGraphics extends JComponent implements MouseMotionListener {
+class ElasticBandGraphics extends JComponent implements MouseMotionListener, MouseListener {
   int WIDTH = 650;
   int HEIGHT = WIDTH;
   double MASS = 1.0;
   int N = 15;
   double DT = 0.0001;
   ElasticBandData ebd;
+  Polygon poly;
+  int points;
+  boolean handlingClick;
 
   ElasticBandGraphics() {
     setPreferredSize(new Dimension(WIDTH,HEIGHT));
     ebd = new ElasticBandData(MASS,N,DT,WIDTH);
     addMouseMotionListener(this);
+    addMouseListener(this);
+    points = 0;
   }
 
   @Override
@@ -32,6 +37,7 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener {
 
   void paintEbd(Graphics g, ElasticBandData ebd0) {
     ((Graphics2D) g).setStroke(new BasicStroke(4));
+    g.setFont(new Font("Helvetica",Font.BOLD,18));
 
     int[] xPoints = new int[ebd0.masses.length];
     int[] yPoints = new int[ebd0.masses.length];
@@ -43,6 +49,10 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener {
     int[] newYPoints = smoothRefinement(yPoints,3);
 
     g.drawPolygon(newXPoints,newYPoints,newXPoints.length);
+    poly = new Polygon(newXPoints,newYPoints,newXPoints.length);
+
+    g.drawString("Click outside the band to score a point.", 10, 30);
+    g.drawString("Points: " + points, 10, WIDTH-10); 
   }
 
 
@@ -52,6 +62,20 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener {
   }
   
   public void mouseDragged(MouseEvent e) { }
+
+  public void mouseExited(MouseEvent e) { }
+
+  public void mouseEntered(MouseEvent e) { }
+
+  public void mouseReleased(MouseEvent e) { }
+
+  public void mousePressed(MouseEvent e) { 
+    if(!poly.contains(e.getX(),e.getY())) {
+      points++;
+    }
+  }
+
+  public void mouseClicked(MouseEvent e) { }
 
   int[] smoothRefinement(int[] points,int mult) {
     int[] result = new int[mult*points.length];
