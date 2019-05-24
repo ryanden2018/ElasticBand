@@ -45,8 +45,8 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener, Mou
       xPoints[i] = (int) ebd0.masses[i].centerX;
       yPoints[i] = (int) ebd0.masses[i].centerY;
     }
-    int[] newXPoints = smoothRefinement(xPoints,3);
-    int[] newYPoints = smoothRefinement(yPoints,3);
+    int[] newXPoints = smoothRefinement(xPoints,10);
+    int[] newYPoints = smoothRefinement(yPoints,10);
 
     g.drawPolygon(newXPoints,newYPoints,newXPoints.length);
     poly = new Polygon(newXPoints,newYPoints,newXPoints.length);
@@ -102,8 +102,14 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener, Mou
   int[] smoother(int[] points) {
     int[] result = new int[points.length];
     for(int i = 0; i < points.length; i++) {
-      result[i] =(int) ( 0.25 * (double) ( 
-        points[(i+3)%(points.length)]
+      result[i] =(int) ( 0.1 * (double) (
+        points[(i+9)%points.length]
+        + points[(i+8)%points.length]
+        + points[(i+7)%points.length]
+        + points[(i+6)%points.length] 
+        + points[(i+5)%points.length]
+        + points[(i+4)%points.length]
+        + points[(i+3)%(points.length)]
         + points[(i+2)%(points.length)]
         + points[(i+1)%(points.length)]
         + points[i]));
