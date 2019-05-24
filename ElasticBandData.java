@@ -5,20 +5,31 @@ class ElasticBandData {
 
   ElasticBandData(double mass, int N, double dt, double width) {
     this.dt = dt;
-    springs = new Spring[N];
+    springs = new Spring[(N*(N-1))/2];
     masses = new Mass[N];
 
     for(int i=0; i<N; i++) {
       double theta = (1.0/N) * i * 2 * Math.PI;
       masses[i] = new Mass((0.5+0.25*Math.sin(theta))*width,
         (0.5+0.25*Math.cos(theta))*width,
-        Math.sin(2*theta),Math.cos(2*theta),1.0);
+        4*Math.cos(theta),-4*Math.sin(theta),1.0);
     }
 
+    int count = 0;
     for(int i = 0; i < N; i++) {
-      springs[i] = new Spring(masses[(i+1)%N],masses[i],
-        2.0*Math.PI*0.25*width/N, 1);
+      for(int j = 0; j < N; j++) {
+        if(i < j) {
+          double dispX = masses[i].centerX - masses[j].centerX;
+          double dispY = masses[i].centerY - masses[j].centerY;
+          double dist = Math.sqrt(Math.pow(dispX,2)+Math.pow(dispY,2));
+          springs[count] = new Spring(
+            masses[i],masses[j], dist, 1);
+          count++;
+        }
+      }
     }
+
+    
   }
 
   void update() {

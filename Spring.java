@@ -38,8 +38,4 @@ class Spring {
   double forceY() {
     return forceScalar() * ny();
   }
-
-  double angle(Spring otherSpring) {
-    return nx()*otherSpring.nx() + ny()*otherSpring.ny();
-  }
 }
