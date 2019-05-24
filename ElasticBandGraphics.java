@@ -61,7 +61,10 @@ class ElasticBandGraphics extends JComponent implements MouseMotionListener, Mou
     ebd.cursorY = e.getY();
   }
   
-  public void mouseDragged(MouseEvent e) { }
+  public void mouseDragged(MouseEvent e) { 
+    ebd.cursorX = e.getX();
+    ebd.cursorY = e.getY();
+  }
 
   public void mouseExited(MouseEvent e) { }
 
